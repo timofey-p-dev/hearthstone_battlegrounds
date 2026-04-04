@@ -5,6 +5,7 @@ class Hero(ABC):
     def __init__(self):
         self.hp = 30
         self.armor = 0
+        self.effects = []
     
     @property
     @abstractmethod
@@ -13,9 +14,6 @@ class Hero(ABC):
     @property
     @abstractmethod
     def attack_enemy(self):     pass
-    
-    @abstractmethod
-    def attack(self, other):      pass
         
     def take_damage(self, dmg):
         if dmg <= self.armor:
@@ -37,20 +35,6 @@ class Mag(Hero):
     def attack_enemy(self):
         return random.choices([3, 4], weights=[65, 35], k=1)[0]
 
-    def attack(self, other):
-        dmg = random.choices([3, 4], weights=[65, 35], k=1)[0]
-
-        print(self.name, 'атакует', other.name, 'с возрождением')
-        other.take_damage(dmg)
-
-        if self.hp + dmg <= 30:
-            self.hp += dmg
-        else:
-            self.hp = 30
-
-        print('У', other.name, 'осталось', other.hp, 'HP')
-        print(self.name, 'похилился на', dmg, 'HP')
-
 class Tank(Hero):
     def __init__(self):
         super().__init__()
@@ -63,13 +47,7 @@ class Tank(Hero):
     @property
     def attack_enemy(self):
         return random.choices([1, 5], weights=[50, 50], k=1)[0]
-
-    def attack(self, other):
-        dmg = random.choices([3, 4], weights=[50, 50], k=1)[0]
-        print(self.name, 'отправляет снаряд в', other.name, 'с атакой', dmg)
-        other.take_damage(dmg)
-        print('У', other.name, 'осталось', other.hp, 'HP')
-
+    
 class Assassin(Hero):
     def __init__(self):
         super().__init__()
@@ -83,12 +61,6 @@ class Assassin(Hero):
     def attack_enemy(self):
         return random.choices([5, 6], weights=[50, 50], k=1)[0]
 
-    def attack(self, other):
-        dmg = random.choices([4, 5, 6], weights=[1, 3, 1], k=1)[0]
-        print(self.name, 'атакует', other.name, 'с атакой', dmg)
-        other.take_damage(dmg)
-        print('У', other.name, 'осталось', other.hp, 'HP')
-
 class Archer(Hero):
     def __init__(self):
         super().__init__()
@@ -101,12 +73,6 @@ class Archer(Hero):
     @property
     def attack_enemy(self):
         return random.choices([5, 3], weights=[40, 60], k=1)[0]
-
-    def attack(self, other):
-        dmg = random.choices([2, 3, 4, 5], weights=[20, 30, 30, 20], k=1)[0]
-        print(self.name, 'атакует', other.name, 'с атакой', dmg)
-        other.take_damage(dmg)
-        print('У', other.name, 'осталось', other.hp, 'HP')
 
 
 
