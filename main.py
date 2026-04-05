@@ -1,19 +1,8 @@
-from hero import IceMag, FireMag, TT, CT, PersianAssassin, SyiranAssassin, BlueArcher, RedArcher
+from create_heroes import heroes
 from player import Player
 from battlegrounds import Battlegrounds, random
 
 bg = Battlegrounds()
-
-heroes = [
-    IceMag,
-    FireMag,
-    TT,
-    CT,
-    PersianAssassin,
-    SyiranAssassin,
-    BlueArcher,
-    RedArcher
-]
 
 nicknames = [
     'Саня',
