@@ -13,3 +13,8 @@ class Hero():
             self.hp = max(self.hp-(dmg-self.armor), 0)
             self.armor = 0
     
+    def handle_event(self, event_type, event):
+        for effect in self.effects[:]:
+            effect.react(event_type, event)
+        self.effects = [effect for effect in self.effects if effect.active]
+    
