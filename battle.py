@@ -3,14 +3,19 @@ class DamageEvent:
         self.attacker = attacker
         self.defender = defender
         self.damage = damage
+        self.counter_damage = defender.attack
 
 class AttackProcessor:
     def attack(self, attacker, defender):
-        damage = attacker.attack_enemy
-        event = DamageEvent(attacker, defender, damage)
+        event = DamageEvent(attacker, defender, attacker.attack)
+
+        for hero in [attacker, defender]:
+            for effect in hero.effects:
+                effect.react('before_damage', event)
+
         defender.take_damage(event.damage)
+        attacker.take_damage(event.counter_damage)
 
-        for effect in defender.effects:
-            effect.on_damage(event)
-
-
+        for hero in [attacker, defender]:
+            for effect in hero.effects:
+                effect.react('after_damage', event)
