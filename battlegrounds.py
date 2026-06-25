@@ -28,7 +28,7 @@ class Battlegrounds:
             self.players = alive_players
         tab = list(reversed(tab))
         if len(self.players) == 1:
-            print('1 место:', tab[0].nickname, 'с героем', tab[0].hero.name, '\n2 место:', tab[1].nickname, 'с героем', tab[1].hero.name, '\n3 место:', tab[2].nickname, 'с героем', tab[2].hero.name)
+            print('1 место:', self.players[0].nickname, 'с героем', self.players[0].hero.name, '\n2 место:', tab[0].nickname, 'с героем', tab[0].hero.name, '\n3 место:', tab[1].nickname, 'с героем', tab[1].hero.name)
             print('Игра шла', rounds, 'раундов')
         if len(self.players) == 0:
             print('Все игроки погибли. Победителя нет.')
